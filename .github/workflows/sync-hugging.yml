@@ -1,4 +1,4 @@
-name: Sync with Hugging Face Hub
+name: Sync with Hugging Face Hub and Update Port
 
 on:
   push:
@@ -9,6 +9,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+      
+    - name: Update Port in config.json
+      run: |
+        sed -i 's/"port": [0-9]\+/"port": 7860/g' config.json
+      
     - name: Sync with Hugging Face
       uses: nateraw/huggingface-sync-action@v0.0.4
       with:
@@ -17,3 +24,7 @@ jobs:
         repo_type: space
         space_sdk: docker
         hf_token: ${{ secrets.HF_TOKEN }}
+
+    - name: Revert changes in config.json
+      run: |
+        git restore config.json

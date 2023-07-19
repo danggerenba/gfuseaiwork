@@ -24,7 +24,3 @@ jobs:
         repo_type: space
         space_sdk: docker
         hf_token: ${{ secrets.HF_TOKEN }}
-
-    - name: Revert changes in config.json
-      run: |
-        git restore config.json

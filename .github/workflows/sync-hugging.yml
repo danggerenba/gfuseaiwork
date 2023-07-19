@@ -15,5 +15,5 @@ jobs:
         github_repo_id: ramonvc/freegpt-webui
         huggingface_repo_id: monra/test
         repo_type: space
-        space_sdk: gradio
+        space_sdk: docker
         hf_token: ${{ secrets.HF_TOKEN }}
